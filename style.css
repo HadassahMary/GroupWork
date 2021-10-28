@@ -1,0 +1,14 @@
+.fa-cart-plus{
+    color:green;
+}
+.cartItem p{
+    color: pink;
+    display: inline-block;
+}
+.cartItem:hover{
+    cursor: pointer;
+}
+.CartButton:hover{
+    cursor: pointer;
+    background-color: purple;
+}

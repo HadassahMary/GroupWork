@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue.js Pet Depot</title>
+    <script src="https://unpkg.com/vue"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <!-- Making a Pet Depot -->
+    <div id="app">
+        <header>
+            <h1 v-text="sitename"></h1>
+            <button class="cartItem" v-on:click='showCheckout'>
+                <p>{{cartItemCount}}</p>
+                <span class="fas fa-cart-plus">Checkout</span>
+            </button>
+        </header>
+        <main>
+            <div v-if="showProduct">
+            <figure>
+                <img v-bind:src="product.image"> <!--to bind the image-->
+            </figure>
+            <h2 v-text="product.title"></h2><!--prints text directly as is-->
+            <p v-html="product.description"></p> <!--Understands the text as html text-->
+            <p>Price: {{product.price}}</p>
+            <p>Available Stock: {{product.availableInventory}}</p>
+            <!-- <button v-on:click="addToCart" v-show="canAddToCart">Add To Cart</button> -->
+            <button class="CartButton"  v-on:click="addToCart" v-if="canAddToCart" >Add To Cart</button>
+            <button class="CartButton" disabled='disabled' v-else >Add To Cart</button>
+        </div>
+        <div v-else><h2>Checkout</h2></div>
+
+        </main>
+
+    </div>
+    
+    <script>
+        var webstore = new Vue({
+            el: '#app', //links to the <div> with id app
+            data: {              
+                sitename: "Vue.js Pet Depot",
+                product: {
+                    id: 1001,
+                    title: "Cat Food, 25lb bag",
+                    description: 'A 25 pound bag of <em>irresistable</em>,'+' organic goodness for your cat.',
+                    price: 2000,
+                    image: "cat.jpg",
+                    availableInventory: 20
+                },
+                cart: [],
+                showProduct: true,
+            },
+            methods: {
+                addToCart(){
+                    this.cart.push(this.product.id);
+                },
+                showCheckout(){
+                    this.showProduct = this.showProduct ? false : true;
+                }
+            },
+            computed: {
+                cartItemCount: function(){
+                    return this.cart.length || '';
+                },
+                canAddToCart: function(){
+                    return this.product.availableInventory > this.cartItemCount;
+                }
+            }
+        });
+    </script>
+
+
+    
+</body>
+</html>
