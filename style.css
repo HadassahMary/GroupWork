@@ -2,7 +2,7 @@
     color:green;
 }
 .cartItem p{
-    color: pink;
+    color: pink;  
     display: inline-block;
 }
 .cartItem:hover{
@@ -10,5 +10,5 @@
 }
 .CartButton:hover{
     cursor: pointer;
-    background-color: purple;
+    background-color: black;
 }
